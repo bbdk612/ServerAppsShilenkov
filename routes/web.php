@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\InfoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/info/server', [InfoController::class, 'info']);
+Route::get('/info/client', [InfoController::class, 'user_info']);
+Route::get('/info/database', [InfoController::class, 'database_info']);

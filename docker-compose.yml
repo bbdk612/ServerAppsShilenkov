@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      network: host
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+      - ./.docker/apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
+    networks:
+      - app-network
+    
+  db:
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=laravel
+      - MYSQL_USER=mishana
+      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=secret
+    ports:
+      - "3360:3360"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
